@@ -72,8 +72,9 @@ namespace ToDoList.Models
       else
       {
         Item newItem = (Item) otherItem;
+        bool idEquality = (this.Id == newItem.Id);
         bool descriptionEquality = (this.Description == newItem.Description);
-        return descriptionEquality;
+        return (idEquality && descriptionEquality);
       }
     }
     public void Save()
@@ -90,7 +91,7 @@ namespace ToDoList.Models
       description.Value = this.Description;
       cmd.Parameters.Add(description);    
       cmd.ExecuteNonQuery();
-      //Id = cmd.LastInsertedId;
+      Id = (int) cmd.LastInsertedId;
 
       // End new code
 
